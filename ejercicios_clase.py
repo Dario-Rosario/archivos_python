@@ -23,18 +23,37 @@ def ej1():
     # Ejercicios con archivos txt
     cantidad_lineas = 0
 
+    fi = open("notas.txt", "r")
+
+    cantidad_lineas = contar_lineas(fi)
+
+    print("Lineas leidas del texto:", cantidad_lineas)
+
+    fi.seek(0)
+    print(fi.read()) #imprimi el texto como practica.
+
+    fi.close() 
     '''
     Realizar un prorgrama que cuenta la cantidad de líneas
     de un archivo. Abra el archivo "notas.txt" en modo "lectura",
-    lea linea alinea el archivo, y cuente la cantidad de líneas.
+    lea linea a linea el archivo, y cuente la cantidad de líneas.
     Al finalizar el proceso, imprimir en pantalla la cantidad
-    de líneas leaidas.
+    de líneas leidas.
 
     Como práctica de funciones, puede realizar la función
     "contar_lineas" que reciba como parámetro el nombre del archivo
     y cumpla el objetivo especificado, retornando la cantidad
     de líneas encontradas.
     '''
+
+def contar_lineas(fi):
+    
+    cantidad_lineas = 0
+
+    for line in fi:
+        cantidad_lineas +=1
+
+    return cantidad_lineas
 
 
 def ej2():
@@ -60,6 +79,22 @@ def ej2():
 
     # Recuerde cerrar los archivos al final ;)
 
+    fi = open("notas.txt", "r")
+    fo = open("notas2.txt", "a")
+
+    for line in fi.readlines():
+        fo.write(line)
+
+    fi.seek(0)
+    for line in fi.readlines():
+        cantidad_lineas +=1
+    
+
+    print(cantidad_lineas)
+
+    fi.close()
+    fo.close()
+
 
 def ej3():
     # Ejercicios con archivos CSV
@@ -72,12 +107,48 @@ def ej3():
     Al finalizar el proceso, imprima en pantalla los resultados.
     '''
 
+    with open("propiedades.csv", "r") as csvfile:
+        data = list(csv.DictReader(csvfile))
+
+    ambientes_2 = 0
+    ambientes_3 = 0
+   
+    cantidad_filas = len(data)
+    for i in range(cantidad_filas):
+        if data[i].get("ambientes") == "2":
+            ambientes_2 += 1
+        else:
+            if data[i].get("ambientes") == "3":
+                ambientes_3 += 1   
+
+    print("Cantidad de departamentos de dos ambientes es:", ambientes_2)         
+    print("Cantidad de departamentos de tres ambientes es:", ambientes_3)  
+
 
 def ej4():
     # Ejercicios con diccionarios
+
     inventario = {'manzanas': 6}
+    
+    while True:
+    
+        nuevo_ingreso = str(input("Ingrese una fruta o verdura (Si termino ingrese FIN): \n"))
+        
+        for k, v in inventario.items():
+            if nuevo_ingreso == k:
+                v += 1
+                inventario.update({k:v})             
+            if nuevo_ingreso != k:
+                v = 1
+                inventario.update({nuevo_ingreso:v})
+
+        if nuevo_ingreso == "FIN":
+            break
+    
+
 
     '''
+
     Realice un programa que pida por consola
     el nombre de una fruta o verdura y luego
     pida la cantidad que hay en stock
@@ -143,9 +214,9 @@ def ej5():
 
 
 if __name__ == '__main__':
-    print("Bienvenidos a otra clase de Inove con Python")
-    ej1()
+    #print("Bienvenidos a otra clase de Inove con Python")
+    #ej1()
     #ej2()
     #ej3()
-    #ej4()
+    ej4()
     #ej5()
