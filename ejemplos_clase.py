@@ -149,9 +149,9 @@ def read_csv_vieja_escuela():
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
-    diccionario()
-    read_txt()
-    write_txt()
-    read_csv()
+    #diccionario()
+    #read_txt()
+    #write_txt()
+    #read_csv()
     write_csv()
-    read_csv_vieja_escuela()
+    #read_csv_vieja_escuela()

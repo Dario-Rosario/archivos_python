@@ -134,18 +134,16 @@ def ej4():
     
         nuevo_ingreso = str(input("Ingrese una fruta o verdura (Si termino ingrese FIN): \n"))
         
-        for k, v in inventario.items():
-            if nuevo_ingreso == k:
-                v += 1
-                inventario.update({k:v})             
-            if nuevo_ingreso != k:
-                v = 1
-                inventario.update({nuevo_ingreso:v})
-
+        if nuevo_ingreso in inventario:
+            inventario[nuevo_ingreso] += 1
+        else:    
+            inventario[nuevo_ingreso] = 1    
+                
         if nuevo_ingreso == "FIN":
-            break
+                break
     
-
+    stock = str(input("Ingrese el stock que desea conocer: \n"))
+    print("El stock de", stock, "es:", inventario.get(stock))
 
     '''
 
@@ -181,6 +179,28 @@ def ej4():
 def ej5():
     # Ejercicios con archivos CSV
     inventario = {}
+
+    while True:
+    
+        nuevo_ingreso = str(input("Ingrese una fruta o verdura (Si termino ingrese FIN): \n"))
+        
+        if nuevo_ingreso == "FIN":
+            break
+
+        cantidad = float(input("Ingrese la cantidad: \n"))
+        
+        if nuevo_ingreso in inventario:
+            inventario[nuevo_ingreso] += cantidad
+        else:    
+            inventario[nuevo_ingreso] = cantidad   
+                
+    csv_file =  open("inventario.csv", "w", newline="")
+    header = ["Fruta Verdura", "Cantidad"]
+    writer = csv.DictWriter(csv_file, fieldnames=header)
+    writer.writeheader()
+    writer.writerow("inventario")
+    
+    csv_file.close()
 
     '''
     Basado en el ejercicio anterior, genere un archivo CSV
@@ -218,5 +238,5 @@ if __name__ == '__main__':
     #ej1()
     #ej2()
     #ej3()
-    ej4()
-    #ej5()
+    #ej4()
+    ej5()
