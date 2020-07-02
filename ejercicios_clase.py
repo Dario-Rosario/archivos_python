@@ -194,11 +194,16 @@ def ej5():
         else:    
             inventario[nuevo_ingreso] = cantidad   
                 
+    
+
     csv_file =  open("inventario.csv", "w", newline="")
     header = ["Fruta Verdura", "Cantidad"]
     writer = csv.DictWriter(csv_file, fieldnames=header)
     writer.writeheader()
-    writer.writerow("inventario")
+
+    for k, v in inventario.items():
+        row = {'Fruta Verdura': k, 'Cantidad': v}
+        writer.writerow(row)
     
     csv_file.close()
 

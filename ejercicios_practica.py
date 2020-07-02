@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+
+
 '''
 Archivos [Python]
 Ejercicios de práctica
@@ -19,6 +21,17 @@ __version__ = "1.1"
 def ej1():
     print("Cuenta caracteres")
     cantidad_letras = 0
+
+    fi = open("texto.txt", "r")
+    fi.seek(0)
+    
+    contenido = fi.read()
+
+    cantidad_letras = len(contenido)
+    print(cantidad_letras)
+    
+
+    fi.close()    
 
     '''
     Realizar un prorgrama que cuenta la cantidad de caracteres
@@ -49,6 +62,23 @@ def ej2():
     NOTA: Recuerde agregar el salto de línea "\n" a cada entrada
     de texto de la consola antes de copiar la archivo.
     '''
+    fo = open("nuevo.txt", "w")
+    print("Ingrese el texto")
+
+    ingreso = []
+
+    while True:
+        if ingreso == "":
+            break
+        else:
+            ingreso = str(input())
+            fo.write(ingreso)
+            fo.write("\n")
+            cantidad_letras = len(ingreso) + cantidad_letras
+
+    
+
+    fo.close()
 
 
 def ej3():
@@ -121,8 +151,8 @@ def ej4():
 
 
 if __name__ == '__main__':
-    print("Ejercicios de práctica")
+    #print("Ejercicios de práctica")
     #ej1()
     #ej2()
-    #ej3()
+    ej3()
     #ej4()
