@@ -17,6 +17,9 @@ __author__ = "Inove Coding School"
 __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
+import csv
+import re
+
 
 def ej1():
     print("Cuenta caracteres")
@@ -83,7 +86,39 @@ def ej2():
 
 def ej3():
     print("Escrutinio de los alquileres de Capital Federal")
-    cantidad_ambientes = 2
+    cantidad_ambientes = "2"
+
+    cantidad_alquileres = 0
+    tipo_moneda = "ARS"
+    precio = 0
+    precio_promedio = 0
+    precio_max = 0
+    precio_alquiler = 0
+    precio_min = 0
+
+    with open("propiedades.csv", "r") as csvfile:
+        data = list(csv.DictReader(csvfile))
+
+    filas = len(data)
+
+    for i in range(filas):
+        if data[i].get("ambientes") == cantidad_ambientes and data[i].get("moneda") == tipo_moneda:
+            cantidad_alquileres = cantidad_alquileres + 1
+            row = data[i]
+            precio = float(row.get("precio")) + precio
+            precio_promedio = precio/cantidad_alquileres
+            precio_alquiler = float(row.get("precio"))
+            if precio_alquiler > precio_max:
+                precio_max = precio_alquiler
+            if precio_min == 0:
+                precio_min = precio_alquiler    
+            if precio_alquiler < precio_min:
+                precio_min = precio_alquiler    
+            
+    print("Para",cantidad_ambientes,"ambientes estos son los resultados: \n1) La cantidad de alquileres en", tipo_moneda,"es",cantidad_alquileres)
+    print("2) El precio promedio es:",precio_promedio)
+    print("3) El precio maximo es:", precio_max)
+    print("4) El precio minimo es:", precio_min)
 
     '''
     Realizar un prorgrama que solicite la cantidad de
@@ -154,5 +189,5 @@ if __name__ == '__main__':
     #print("Ejercicios de práctica")
     #ej1()
     #ej2()
-    ej3()
-    #ej4()
+    #ej3()
+    ej4()
